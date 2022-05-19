@@ -1,0 +1,13 @@
+name: Download Data
+description: Data extraction from sklearn datasets
+
+outputs:
+- {name: Data, type: LocalPath, description: 'Path where data will be stored.'}
+
+implementation:
+  container:
+    image: fernandolpz/only-tests:download_data_v3    # Currently using external container
+    command: [
+      python, download_data.py,
+      --data, {outputPath: Data},
+    ]

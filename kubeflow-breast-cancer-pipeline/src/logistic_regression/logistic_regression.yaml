@@ -1,0 +1,16 @@
+name: Logistic Regression Classifier
+description: Logistic Regression Classifier model for breast cancer type classification
+
+inputs:
+- {name: Data, type: LocalPath, description: 'Path where the data is stored'}
+outputs:
+- {name: Accuracy, type: Float, description: 'Accuracy of trained model'}
+
+implementation:
+  container:
+    image: fernandolpz/only-tests:logistic_regression_v2    # Currently using external container
+    command: [
+      python, logistic_regression.py,
+      --data, {inputPath: Data},
+      --accuracy, {outputPath: Accuracy}
+    ]

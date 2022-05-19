@@ -1,0 +1,16 @@
+name: Decision Tree Classifier
+description: Decision Tree Classifier model for breast cancer type classification
+
+inputs:
+- {name: Data, type: LocalPath, description: 'Path where the data is stored'}
+outputs:
+- {name: Accuracy, type: Float, description: 'Accuracy of trained model'}
+
+implementation:
+  container:
+    image: fernandolpz/only-tests:decision_tree_v3    # Currently using external container
+    command: [
+      python, decision_tree.py,
+      --data, {inputPath: Data},
+      --accuracy, {outputPath: Accuracy}
+    ]
