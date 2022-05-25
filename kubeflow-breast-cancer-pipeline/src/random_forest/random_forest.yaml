@@ -8,7 +8,7 @@ outputs:
 
 implementation:
   container:
-    image: fernandolpz/only-tests:logistic_regression_v2    # Currently using external container specified for Logistic Regression (tests-only)
+    image: python:3.8-slim
     command: [
       python, random_forest.py,
       --data, {inputPath: Data},

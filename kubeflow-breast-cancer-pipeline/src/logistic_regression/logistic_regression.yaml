@@ -8,7 +8,7 @@ outputs:
 
 implementation:
   container:
-    image: fernandolpz/only-tests:logistic_regression_v2    # Currently using external container
+    image: python:3.8-slim
     command: [
       python, logistic_regression.py,
       --data, {inputPath: Data},

@@ -6,7 +6,7 @@ outputs:
 
 implementation:
   container:
-    image: fernandolpz/only-tests:download_data_v3    # Currently using external container
+    image: python:3.8-slim
     command: [
       python, download_data.py,
       --data, {outputPath: Data},
