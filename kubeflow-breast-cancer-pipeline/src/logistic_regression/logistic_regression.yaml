@@ -8,7 +8,7 @@ outputs:
 
 implementation:
   container:
-    image: dzieciolfilipit/kf_bc_logistic_regression
+    image: dzieciolfilipit/kf_bc_logistic_regression:1.0
     command: [
       python, logistic_regression.py,
       --data, {inputPath: Data},
