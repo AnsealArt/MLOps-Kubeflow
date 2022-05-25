@@ -6,7 +6,7 @@ outputs:
 
 implementation:
   container:
-    image: python:3.8-slim
+    image: dzieciolfilipit/kf_bc_download_data
     command: [
       python, download_data.py,
       --data, {outputPath: Data},

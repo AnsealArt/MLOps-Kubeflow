@@ -8,7 +8,7 @@ outputs:
 
 implementation:
   container:
-    image: python:3.8-slim
+    image: dzieciolfilipit/kf_bc_decision_tree
     command: [
       python, decision_tree.py,
       --data, {inputPath: Data},
