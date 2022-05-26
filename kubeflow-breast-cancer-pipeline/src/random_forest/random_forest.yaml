@@ -8,7 +8,7 @@ outputs:
 
 implementation:
   container:
-    image: dzieciolfilipit/kf_bc_random_forest:1.0
+    image: dzieciolfilipit/kf_bc_random_forest:1.1
     command: [
       python, random_forest.py,
       --data, {inputPath: Data},
