@@ -3,7 +3,7 @@ import argparse
 from pathlib import Path
 
 from sklearn.metrics import accuracy_score
-from sklearn.linear_model import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 def _random_forest(args):
 

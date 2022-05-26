@@ -3,7 +3,7 @@ import argparse
 from pathlib import Path
 
 from sklearn.metrics import accuracy_score
-from sklearn.linear_model import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier
 
 def _decision_tree(args):
 
