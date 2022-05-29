@@ -25,7 +25,7 @@ if __name__ == '__main__':
     
     parser.add_argument('--x_train')
     parser.add_argument('--y_train')
-    parser.add_argument('--output_path', type=dir_path)
+    parser.add_argument('--output_path')
     parser.add_argument('--run_date')
 
     args = parser.parse_args()

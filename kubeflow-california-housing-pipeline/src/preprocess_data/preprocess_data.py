@@ -24,7 +24,7 @@ if __name__ == '__main__':
     # Receive arguments from command line
     parser = argparse.ArgumentParser()
     parser.add_argument('--test_size', type=float)
-    parser.add_argument('--output_path', type=dir_path)
+    parser.add_argument('--output_path')
     parser.add_argument('--run_date')
 
     # If argument has been passed validate it

@@ -11,7 +11,7 @@ def preprocess_op(output_path, run_date, test_size):
 
     return dsl.ContainerOp(
         name = "Download and preprocess data",
-        image = "dzieciolfilipit/kf_ch_preprocess_data:1.0",
+        image = "dzieciolfilipit/kf_ch_preprocess_data:1.1",
         arguments = [
             '--output_path', output_path,
             '--run_date', run_date,
@@ -29,7 +29,7 @@ def train_op(x_train, y_train, output_path, run_date):
 
     return dsl.ContainerOp(
         name = "Train SGD Regressor",
-        image = "dzieciolfilipit/kf_ch_train_model:1.0",
+        image = "dzieciolfilipit/kf_ch_train_model:1.1",
         arguments = [
             '--x_train', x_train,
             '--y_train', y_train,
@@ -45,7 +45,7 @@ def test_op(x_test, y_test, model_path, output_path, run_date):
 
     return dsl.ContainerOp(
         name = "Test model and get MSE metric",
-        image = "dzieciolfilipit/kf_ch_test_model:1.0",
+        image = "dzieciolfilipit/kf_ch_test_model:1.1",
         arguments = [
             '--x_test', x_test,
             '--y_test', y_test,
@@ -62,7 +62,7 @@ def deploy_model_op(model_path, mse_path):
 
     return dsl.ContainerOp(
         name = "Deploy model for inference",
-        image = "dzieciolfilipit/kf_ch_deploy_model:1.0",
+        image = "dzieciolfilipit/kf_ch_deploy_model:1.1",
         arguments = [
             '--model_path', model_path,
             '--mse_path', mse_path
@@ -113,7 +113,7 @@ def pipeline(test_size, output_path):
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--test_size', type=float)
-parser.add_argument('--output_path', type=dir_path)
+parser.add_argument('--output_path')
 
 args = parser.parse_args()
 
