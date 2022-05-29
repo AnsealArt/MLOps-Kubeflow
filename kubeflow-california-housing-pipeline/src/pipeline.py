@@ -11,7 +11,7 @@ def preprocess_op(output_path, run_date, test_size):
 
     return dsl.ContainerOp(
         name = "Download and preprocess data",
-        image = "TOBEPROVIDED",
+        image = "dzieciolfilipit/kf_ch_preprocess_data:1.0",
         arguments = [
             '--output_path', output_path,
             '--run_date', run_date,
@@ -29,7 +29,7 @@ def train_op(x_train, y_train, output_path, run_date):
 
     return dsl.ContainerOp(
         name = "Train SGD Regressor",
-        image = "TOBEPROVIDED",
+        image = "dzieciolfilipit/kf_ch_train_model:1.0",
         arguments = [
             '--x_train', x_train,
             '--y_train', y_train,
@@ -45,7 +45,7 @@ def test_op(x_test, y_test, model_path, output_path, run_date):
 
     return dsl.ContainerOp(
         name = "Test model and get MSE metric",
-        image = "TOBEPROVIDED",
+        image = "dzieciolfilipit/kf_ch_test_model:1.0",
         arguments = [
             '--x_test', x_test,
             '--y_test', y_test,
@@ -62,7 +62,7 @@ def deploy_model_op(model_path, mse_path):
 
     return dsl.ContainerOp(
         name = "Deploy model for inference",
-        image = "TOBEPROVIDED",
+        image = "dzieciolfilipit/kf_ch_deploy_model:1.0",
         arguments = [
             '--model_path', model_path,
             '--mse_path', mse_path
@@ -72,8 +72,8 @@ def deploy_model_op(model_path, mse_path):
 
 # Describe Pipeline
 @dsl.pipeline(
-    name = "Boston Housing Price prediction Pipeline",
-    description = "Sample Pipeline for Bost Houses Prices predictions using SGDRegressor regression model"
+    name = "California Housing prediction Pipeline",
+    description = "Sample Pipeline for California Housing predictions using SGDRegressor regression model"
 )
 # Define Pipeline steps
 def pipeline(test_size, output_path):
