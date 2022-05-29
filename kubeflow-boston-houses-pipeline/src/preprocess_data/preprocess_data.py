@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 def _preprocess_data(output_path, run_date, test_size=0.2):
 
     # Load data from sklearn datasets
-    X, y = datasets.load_boston(return_X_y=True)
+    X, y = datasets.fetch_california_housing(return_X_y=True)
 
     # Split data for train and test sets using given test size
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size)
