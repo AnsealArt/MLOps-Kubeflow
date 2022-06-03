@@ -118,7 +118,7 @@ parser.add_argument('--output_path')
 args = parser.parse_args()
 
 # Create Kubeflow Client object and run Pipeline Function
-client = kfp.Client()
+client = kfp.Client(host='http://ml-pipeline-ui:80')
 client.create_run_from_pipeline_func(
     pipeline, 
     arguments = {
