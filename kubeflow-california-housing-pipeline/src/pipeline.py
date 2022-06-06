@@ -76,7 +76,7 @@ def deploy_model_op(model_path, mse_path):
     description = "Sample Pipeline for California Housing predictions using SGDRegressor regression model"
 )
 # Define Pipeline steps
-def pipeline(test_size, output_path):
+def pipeline(test_size, output_path, deployment_threshhold_mse):
 
     # Use current date without separators
     # Sample date: 20220529160603
@@ -103,10 +103,26 @@ def pipeline(test_size, output_path):
         dsl.InputArgumentPath(run_date)
     ).after(_test_op)
 
-    deploy_model_op(
-        dsl.InputArgumentPath(_train_op.outputs['model_path']),
-        dsl.InputArgumentPath(_test_op.outputs['mean_squared_error'])
-    ).after(_test_op)
+    # Define Production deployment condition, retrain otherwise
+    with dsl.Condition(_test_op.outputs['mean_squared_error'] < deployment_threshhold_mse):
+
+        deploy_model_op(
+            dsl.InputArgumentPath(_train_op.outputs['model_path']),
+            dsl.InputArgumentPath(_test_op.outputs['mean_squared_error'])
+        ).after(_test_op)
+
+    with dsl.Condition(_test_op.outputs['mean_squared_error'] >= deployment_threshhold_mse):
+
+        client = kfp.Client(host='http://ml-pipeline-ui:80')
+        client.create_run_from_pipeline_func(
+            pipeline, 
+            arguments = {
+                'test_size': args.test_size,
+                'output_path': args.output_path,
+                'deployment_threshhold_mse': args.deployment_threshhold_mse
+        }
+    )
+
 
 
 # Add arguments to main run
@@ -114,6 +130,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--test_size', type=float)
 parser.add_argument('--output_path')
+parser.add_argument('--deployment_threshhold_mse', type=float)
 
 args = parser.parse_args()
 
@@ -123,5 +140,7 @@ client.create_run_from_pipeline_func(
     pipeline, 
     arguments = {
         'test_size': args.test_size,
-        'output_path': args.output_path
-})
+        'output_path': args.output_path,
+        'deployment_threshhold_mse': args.deployment_threshhold_mse
+    }
+)
